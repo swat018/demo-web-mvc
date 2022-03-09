@@ -30,16 +30,4 @@ public class SampleControllerTest {
                 .andExpect(status().isOk());
     }
 
-    @Test
-    public void helloTest1() throws Exception {
-
-        mockMvc.perform(options("/hello"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(header().stringValues(HttpHeaders.ALLOW,
-                        hasItems(containsString("GET"),
-                                containsString("POST"),
-                                containsString("OPTIONS"),
-                                containsString("HEAD"))));
-    }
 }
