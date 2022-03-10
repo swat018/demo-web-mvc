@@ -1,36 +1,27 @@
 package me.swat018.demowebmvc;
 
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.MatrixVariable;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class SampleController {
 
-    @GetHelloMapping
-    @ResponseBody
-    public String hello() {
-        return "hello";
-    }
-
-    @GetMapping("/events")
-    @ResponseBody
-    public String events() {
-        return "events";
-    }
-
+//    @GetMapping("/events/{id}")
+//    @ResponseBody
+//    public Event getEvent(@PathVariable Integer id){
+//        Event event = new Event();
+//        event.setId(id);
+//        return event;
+//    }
     @GetMapping("/events/{id}")
     @ResponseBody
-    public String getEvents(@PathVariable int id) {
-        return "events";
+    public Event getEvent(@PathVariable("id") Integer idValue, @MatrixVariable String name){
+        Event event = new Event();
+        event.setId(idValue);
+        event.setName(name);
+        return event;
     }
-
-    @DeleteMapping("/events/{id}")
-    @ResponseBody
-    public String deleteEvents(@PathVariable int id) {
-        return "events";
-    }
-
-
 }
