@@ -2,8 +2,11 @@ package me.swat018.demowebmvc;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 @Controller
@@ -17,12 +20,15 @@ public class SampleController {
         return "/events/form";
     }
 
-    @PostMapping("/events")
+    @PostMapping("/events/name/{name}")
     @ResponseBody
-    public Event getEvent(@RequestParam String name, @RequestParam Integer limit){
-        Event event = new Event();
-        event.setName(name);
-        event.setLimit(limit);
+    public Event getEvent(@Valid@ModelAttribute Event event, BindingResult bindingResult){
+        if(bindingResult.hasErrors()) {
+            System.out.println("=======================================");
+            bindingResult.getAllErrors().forEach(c -> {
+                System.out.println(c.toString());
+            });
+        }
         return event;
     }
 }
