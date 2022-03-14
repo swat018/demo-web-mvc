@@ -23,9 +23,9 @@ public class SampleController {
 
     @PostMapping("/events/form/name")
     public String eventFormNameSubmit(@Validated @ModelAttribute Event event,
-                           BindingResult bindingResult){
+                                      BindingResult bindingResult){
         if(bindingResult.hasErrors()) {
-            return "/events/form/limit";
+            return "/events/form-name";
         }
         return "redirect:/events/form/limit";
     }
@@ -33,16 +33,17 @@ public class SampleController {
     @GetMapping("/events/form/limit")
     public String eventFormLimit(@ModelAttribute Event event, Model model) {
         model.addAttribute("event", event);
-//        httpSession.setAttribute("event", newEvent);
         return "/events/form-limit";
     }
 
     @PostMapping("/events/form/limit")
     public String eventFormLimitSubmit(@Validated @ModelAttribute Event event,
-                                      BindingResult bindingResult){
+                                       BindingResult bindingResult,
+                                       SessionStatus sessionStatus){
         if(bindingResult.hasErrors()) {
             return "/events/form-limit";
         }
+        sessionStatus.setComplete();
         return "redirect:/events/list";
     }
 
