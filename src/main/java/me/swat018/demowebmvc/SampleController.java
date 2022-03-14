@@ -15,23 +15,34 @@ import java.util.List;
 @SessionAttributes("event")
 public class SampleController {
 
-    @GetMapping("/events/form")
-    public String eventForm(Model model) {
-        Event newEvent = new Event();
-        newEvent.setLimit(50);
-        model.addAttribute("event", newEvent);
-//        httpSession.setAttribute("event", newEvent);
-        return "/events/form";
+    @GetMapping("/events/form/name")
+    public String eventFormName(Model model) {
+        model.addAttribute("event", new Event());
+        return "/events/form-name";
     }
 
-    @PostMapping("/events")
-    public String createEvent(@Validated @ModelAttribute Event event,
-                           BindingResult bindingResult,
-                           SessionStatus sessionStatus){
+    @PostMapping("/events/form/name")
+    public String eventFormNameSubmit(@Validated @ModelAttribute Event event,
+                           BindingResult bindingResult){
         if(bindingResult.hasErrors()) {
-            return "/events/form";
+            return "/events/form-name";
         }
-        sessionStatus.setComplete();
+        return "redirect:/events/list";
+    }
+
+    @GetMapping("/events/form/limit")
+    public String eventFormLimit(@ModelAttribute Event event, Model model) {
+        model.addAttribute("event", event);
+//        httpSession.setAttribute("event", newEvent);
+        return "/events/form-limit";
+    }
+
+    @PostMapping("/events/form/limit")
+    public String eventFormLimitSubmit(@Validated @ModelAttribute Event event,
+                                      BindingResult bindingResult){
+        if(bindingResult.hasErrors()) {
+            return "/events/form-limit";
+        }
         return "redirect:/events/list";
     }
 
