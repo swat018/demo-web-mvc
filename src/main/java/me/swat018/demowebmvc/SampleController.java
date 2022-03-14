@@ -25,9 +25,9 @@ public class SampleController {
     public String eventFormNameSubmit(@Validated @ModelAttribute Event event,
                            BindingResult bindingResult){
         if(bindingResult.hasErrors()) {
-            return "/events/form-name";
+            return "/events/form/limit";
         }
-        return "redirect:/events/list";
+        return "redirect:/events/form/limit";
     }
 
     @GetMapping("/events/form/limit")
