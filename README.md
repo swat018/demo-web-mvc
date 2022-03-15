@@ -17,3 +17,4 @@
   - 핸들러 메서드 7부: 폼 서브밋 에러 처리
   - 핸들러 메서드 8부: @SessionAttributes
   - 핸들러 메서드 9부: 폼 서브밋
+  - 핸들러 메서드 10부: @SessionAttribute
