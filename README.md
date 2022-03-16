@@ -20,3 +20,4 @@
   - 핸들러 메서드 10부: @SessionAttribute
   - 핸들러 메서드 11부: RedirectAttribute
   - 핸들러 메서드 12부: FlashAttributes
+  - 핸들러 메서드 13부: MultipartFile
