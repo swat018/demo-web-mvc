@@ -42,38 +42,29 @@ public class SampleController {
     public String eventFormLimitSubmit(@Validated @ModelAttribute Event event,
                                        BindingResult bindingResult,
                                        SessionStatus sessionStatus,
-//                                       Model model){
                                        RedirectAttributes attributes) {
         if(bindingResult.hasErrors()) {
             return "/events/form-limit";
         }
         sessionStatus.setComplete();
-//        model.addAttribute("name", event.getName());
-//        model.addAttribute("limit", event.getLimit());
-        attributes.addAttribute("name", event.getName());
-        attributes.addAttribute("limit", event.getLimit());
+        attributes.addFlashAttribute("newEvent", event);
         return "redirect:/events/list";
     }
 
     @GetMapping("/events/list")
-    public String getEvents(//@RequestParam String name,
-                            //@RequestParam Integer limit,
-                            @ModelAttribute("newEvent") Event event,
-                            Model model,
+    public String getEvents(Model model,
                             @SessionAttribute LocalDateTime visitTime) {
         System.out.println(visitTime);
-
-//        Event newEvent = new Event();
-//        newEvent.setName(name);
-//        newEvent.setLimit(limit);
 
         Event spring = new Event();
         spring.setName("spring");
         spring.setLimit(10);
 
+        Event newEvent = (Event) model.asMap().get("newEvent");
+
         List<Event> eventList = new ArrayList<>();
         eventList.add(spring);
-        eventList.add(event);
+        eventList.add(newEvent);
 
         model.addAttribute(eventList);
 

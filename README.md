@@ -19,3 +19,4 @@
   - 핸들러 메서드 9부: 폼 서브밋
   - 핸들러 메서드 10부: @SessionAttribute
   - 핸들러 메서드 11부: RedirectAttribute
+  - 핸들러 메서드 12부: FlashAttributes
