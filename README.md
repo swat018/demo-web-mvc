@@ -23,3 +23,4 @@
   - 핸들러 메서드 13부: MultipartFile
   - 핸들러 메서드 14부: ResponseEntity
   - 핸들러 메서드 15부: @RequestBody & HttpEntitu
+  - 핸들러 메서드 16부: @RequestBody & ResponseEntitu
