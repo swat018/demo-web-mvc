@@ -25,3 +25,4 @@
   - 핸들러 메서드 15부: @RequestBody & HttpEntitu
   - 핸들러 메서드 16부: @RequestBody & ResponseEntitu
   - 모델: @ModelAttribute
+  - 데이터 바인더: @InitBinder

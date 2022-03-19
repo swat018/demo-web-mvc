@@ -1,9 +1,11 @@
 package me.swat018.demowebmvc;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -16,14 +18,18 @@ import java.util.List;
 @SessionAttributes("event")
 public class EventController {
 
-//    @ModelAttribute
-//    public void categories(Model model) {
-//        model.addAttribute("categories", List.of("study", "seminar", "hobby", "social"));
-//    }
+//    @Autowired
+//    EventValidator eventValidator;
 
-    @ModelAttribute("categories")
-    public List<String> categories(Model model) {
-        return List.of("study", "seminar", "hobby", "social");
+    @InitBinder("event")
+    public void initEventBinder(WebDataBinder webDataBinder) {
+        webDataBinder.setDisallowedFields("id");
+        webDataBinder.addValidators(new EventValidator());
+    }
+
+    @ModelAttribute
+    public void categories(Model model) {
+        model.addAttribute("categories", List.of("study", "seminar", "hobby", "social"));
     }
 
     @GetMapping("/events/form/name")
@@ -38,6 +44,8 @@ public class EventController {
         if(bindingResult.hasErrors()) {
             return "/events/form-name";
         }
+//        eventValidator.validate(event, bindingResult);
+
         return "redirect:/events/form/limit";
     }
 
