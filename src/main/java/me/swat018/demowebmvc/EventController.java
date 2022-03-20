@@ -18,8 +18,11 @@ import java.util.List;
 @SessionAttributes("event")
 public class EventController {
 
-//    @Autowired
-//    EventValidator eventValidator;
+    @ExceptionHandler({EventException.class, RuntimeException.class})
+    public String eventErrorHandler(RuntimeException ex, Model model) {
+        model.addAttribute("message", "event error");
+        return "error";
+    }
 
     @InitBinder("event")
     public void initEventBinder(WebDataBinder webDataBinder) {
@@ -34,8 +37,10 @@ public class EventController {
 
     @GetMapping("/events/form/name")
     public String eventFormName(Model model) {
-        model.addAttribute("event", new Event());
-        return "/events/form-name";
+        throw new EventException();
+
+//        model.addAttribute("event", new Event());
+//        return "/events/form-name";
     }
 
     @PostMapping("/events/form/name")
@@ -44,7 +49,6 @@ public class EventController {
         if(bindingResult.hasErrors()) {
             return "/events/form-name";
         }
-//        eventValidator.validate(event, bindingResult);
 
         return "redirect:/events/form/limit";
     }
