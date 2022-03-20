@@ -27,3 +27,4 @@
   - 모델: @ModelAttribute
   - 데이터 바인더: @InitBinder
   - 예외 처리 핸들러: @ExceptionHandler
+  - 전역 컨트롤러 : @(Rest)ControllerAdvice
